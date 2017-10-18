@@ -1,0 +1,18 @@
+---
+- name: install web components
+  apt:
+    name={{ item }}
+    state=present
+  with_items:
+    - apache2
+    - libapache2-mod-wsgi
+
+- name: ensure mod_wsgi enabled
+  apache2_module: state=present name=wsgi
+
+- name: de-activate default apache sites-available
+  file: path=/etc/apache2/sites-enabled/000-default.conf state=absent
+  notify: restart apache2
+
+- name: ensure apache2 started
+  service: name=apache2 state=started enabled=yes
