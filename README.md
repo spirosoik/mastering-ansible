@@ -54,3 +54,55 @@ Collect the facts for a host
 ```
 ansible -m setup <yourhost>
 ```
+
+
+## Vault
+
+```
+ansible-vault create vault
+```
+
+## Limit app to run
+
+```
+ansible-playbook site.yml --limit app01
+```
+
+## List/Run/Skip tags
+
+```
+ansible-playbook site.yml --list-tags
+```
+
+Run by tag:
+```
+ansible-playbook site.yml --tags "packages"
+```
+
+Run and skip specific tags
+
+```
+ansible-playbook site.yml --skip-tags "packages"
+```
+
+
+## Run by step
+
+```
+ansible-playbook site.yml --step
+
+
+ansible-playbook site.yml --list-task # find all tasks
+
+
+ansible-playbook site.yml --start-at-task "name of the task" # starts running from given task name
+```
+
+# Syntax Checks
+
+```
+ansible-playbook --syntax-check site.yml
+
+
+ansible-playbook --check site.yml # execution dry run
+```
